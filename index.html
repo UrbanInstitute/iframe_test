@@ -30,6 +30,11 @@
       $('#viz-input').on('change', function() {
         var container = $('#viz-container').html("");
         var viz = this.value;
+
+        if (viz.charAt(0) == "/") {
+          viz = viz.slice(1);
+        }
+
         new pym.Parent(
           "viz-container",
           "http://datatools.urban.org/" + viz,
