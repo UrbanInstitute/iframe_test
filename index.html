@@ -14,7 +14,7 @@
       <input id="viz-input"
              class="form-control"
              type="text"
-             placeholder="try 'fha-refinance' or 'childrens-health-coverage-at-risk'">
+             placeholder="try 'features/fha-refinance' or 'features/childrens-health-coverage-at-risk'">
       <hr>
       <div id="viz-container"></div>
       <hr>
@@ -32,7 +32,7 @@
         var viz = this.value;
         new pym.Parent(
           "viz-container",
-          "http://datatools.urban.org/features/" + viz,
+          "http://datatools.urban.org/" + viz,
           {}
         );
       });
