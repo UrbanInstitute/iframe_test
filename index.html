@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Datatools Embed Test</title>
+</head>
+<body>
+  <div class="container">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 class="jumbotron">Datatools Embed Tester</h1>
+      <label for="#viz-input">Enter Datatools Viz (press enter to load)</label>
+      <input id="viz-input"
+             class="form-control"
+             type="text"
+             placeholder="try 'fha-refinance' or 'childrens-health-coverage-at-risk'">
+      <hr>
+      <div id="viz-container"></div>
+      <hr>
+    </div>
+  </div>
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="http://datatools.urban.org/features/pym.js"></script>
+  <script>
+    $(function() {
+
+
+      $('#viz-input').on('change', function() {
+        var container = $('#viz-container').html("");
+        var viz = this.value;
+        new pym.Parent(
+          "viz-container",
+          "http://datatools.urban.org/features/" + viz,
+          {}
+        );
+      });
+
+      // if ?viz=fha-refinance was specified in url, use it
+      var params = urlParameters();
+      if (params.viz) {
+        $('#viz-input').val(params.viz).trigger('change');
+      }
+
+    });
+    /*
+      grab url parameters
+    */
+    function urlParameters() {
+      var query = location.search.substr(1);
+      var result = {};
+      query.split("&").forEach(function(part) {
+        var item = part.split("=");
+        result[item[0]] = decodeURIComponent(item[1]);
+      });
+      return result;
+    }
+  </script>
+</body>
+</html>
